@@ -1,0 +1,68 @@
+<apex:page controller="Manage_Rate_Controller" sidebar="false" showHeader="false" >
+
+  <head>
+      <apex:includeScript value="//code.jquery.com/jquery-1.12.3.js"/>
+      <apex:includeScript value="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"/>
+      <apex:includescript value="//code.jquery.com/jquery-1.11.1.min.js" / >
+       <apex:includescript value="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" />
+       <apex:stylesheet value="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+       <script>
+           j$ = jQuery.noConflict();
+           j$(document).ready( function () {
+               var rateTable = j$('[id$="rateTable"]').DataTable({
+                   order: [[0, 'asc']],
+                   initComplete: function() {
+                       var api = this.api();
+                       var select = j$('[id$=taskSelect]');
+                       api.column(0).data().unique().sort().each( function ( d, j ) {
+                           select.append( '<option value="'+d+'">'+d+'</option>' )
+                       } );   
+                   }
+               });
+               j$('[id$=taskSelect]').change(function() {
+                   var val = j$.fn.dataTable.util.escapeRegex(
+                       j$(this).val()
+                   );
+                   rateTable.column(0)
+                       .search( val == 'All' ? '' : '^'+val+'$', true, false )
+                       .draw();
+               });
+           });
+       </script>
+  </head>
+  
+  <table id="rateTable" class="display">
+      <thead>
+      <tr>
+      
+<apex:form id="changeDescription"> 
+<apex:pageBlock > 
+<apex:pageBlockSection columns="1">
+ 
+ <apex:inputText value="{!account}" id="theTextInput"/>
+ </apex:pageBlockSection> 
+ <apex:commandButton value="Save" action="{!save}"/>
+ </apex:pageBlock>
+ </apex:form> 
+          <th>Rate Name</th>
+          <th>Company Name</th>
+          <th>Expiring Premium</th>
+          <th>Adjusted % target</th>
+          <th>Tier</th>
+      </tr>
+      </thead>
+      <tbody>
+          
+          <apex:repeat value="{!RateList}" var="rate">
+              <tr>
+                  <td>{!rate.Name}</td>
+                  <td>{!rate.Company_Name__c}</td>
+                  <td>{!rate.Expiring_Premium__c}</td>
+                  <td>{!rate.Tier__c }</td>                                    
+              </tr>
+          </apex:repeat>
+
+      </tbody>
+  </table>
+  
+</apex:page>

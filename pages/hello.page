@@ -1,0 +1,15 @@
+<apex:page sidebar="false">
+        <apex:pageBlock title="My Content" onclick="true">
+            <apex:pageBlockButtons >
+       
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="My Content Section" columns="2">
+               
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="A Section Title">
+            I'm three components deep!
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+</apex:page>

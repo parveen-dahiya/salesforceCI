@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+	
+    <c:helloHeading ></c:helloHeading>
+    <p>Hello Lightning! </p>
+  <div class="center">
+   <p>This is new</p> 
+  </div>  
+    
+</aura:component>

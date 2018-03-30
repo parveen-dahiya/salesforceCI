@@ -1,0 +1,9 @@
+<apex:page Controller="JsonFileSearchController">
+       <apex:form >
+    {!jsonValues}
+        <apex:inputField value="{!jsonValuesList[1].File_Path__c}"/> <p/>
+      
+     {!jsonValuesList[1].File_Path__c} 
+     jsonValueListJson : {!jsonValuesListJSON }
+    </apex:form>
+</apex:page>
